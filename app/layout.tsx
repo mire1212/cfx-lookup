@@ -5,8 +5,8 @@ import '../styles/globals.css';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Error 404: Access Denied',
-  description: 'The requested resource could not be found. Access to this page is restricted.',
+  title: 'Access Denied',
+  description: 'The requested resource could not be found.',
 }
 
 export default function RootLayout({
