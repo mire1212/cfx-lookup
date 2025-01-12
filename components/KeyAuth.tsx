@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 
+// Helper function to detect mobile devices
+const isMobile = () => {
+  return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
+};
+
 interface KeyAuthProps {
   onAuthenticate: () => void;
 }
@@ -26,9 +31,34 @@ export function KeyAuth({ onAuthenticate }: KeyAuthProps) {
 
   useEffect(() => {
     if (keyPresses.length === 2) {
-      onAuthenticate();
+      onAuthenticate(); // Trigger authentication and transition to main page
     }
   }, [keyPresses, onAuthenticate]);
+
+  // Redirect the user on mobile if they click on the ERR_CODE
+  useEffect(() => {
+    if (isMobile()) {
+      const errCodeElement = document.querySelector('.err-code') as HTMLElement;
+
+      if (errCodeElement) {
+        errCodeElement.addEventListener('click', () => {
+          onAuthenticate(); // Trigger authentication and transition on mobile click
+        });
+      }
+    }
+
+    // Cleanup event listener on unmount
+    return () => {
+      if (isMobile()) {
+        const errCodeElement = document.querySelector('.err-code') as HTMLElement;
+        if (errCodeElement) {
+          errCodeElement.removeEventListener('click', () => {
+            onAuthenticate();
+          });
+        }
+      }
+    };
+  }, [onAuthenticate]);
 
   return (
     <motion.div
@@ -55,7 +85,7 @@ export function KeyAuth({ onAuthenticate }: KeyAuthProps) {
         Access Denied: You don't have permission to use this site.
       </motion.p>
       <motion.div
-        className="text-sm text-muted-foreground"
+        className="text-sm text-muted-foreground err-code cursor-pointer"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
@@ -65,4 +95,3 @@ export function KeyAuth({ onAuthenticate }: KeyAuthProps) {
     </motion.div>
   );
 }
-
