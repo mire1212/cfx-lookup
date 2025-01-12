@@ -79,7 +79,7 @@ export function SteamTab({ initialSteamHex, activeTab, isDisabled }: SteamTabPro
           type="text"
           value={steamHex}
           onChange={(e) => setSteamHex(e.target.value)}
-          placeholder="Enter Steam Hex ID (e.g., steam:110000138bc2bb3)"
+          placeholder="Enter Steam Hex ID (e.g., steam:123456789abcdef)"
           className="flex-grow bg-muted text-foreground border-primary h-12"
           disabled={isDisabled}
         />
