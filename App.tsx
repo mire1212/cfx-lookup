@@ -87,23 +87,25 @@ export function App() {
     return () => clearTimeout(timer);
   }, [setAnimatedTextMemoized]);
 
+  // DevTools detection
   useEffect(() => {
-    console.log('DevTools detection effect running');
     const detectDevTools = () => {
-      if (
-        window.outerWidth - window.innerWidth > 160 ||
-        window.outerHeight - window.innerHeight > 160
-      ) {
-        setIsDevToolsOpen(true);
-      } else {
-        setIsDevToolsOpen(false);
+      if (window.innerWidth > 800) { // Check for desktop devices only
+        if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
+          setIsDevToolsOpen(true);
+        } else {
+          setIsDevToolsOpen(false);
+        }
       }
     };
 
     window.addEventListener('resize', detectDevTools);
-    setInterval(detectDevTools, 1000);
+    const intervalId = setInterval(detectDevTools, 1000);
 
-    return () => window.removeEventListener('resize', detectDevTools);
+    return () => {
+      window.removeEventListener('resize', detectDevTools);
+      clearInterval(intervalId);
+    };
   }, []);
 
   useEffect(() => {
@@ -143,7 +145,6 @@ export function App() {
       setIsTransitioning(false);
     }, 1000);
   }, []);
-
 
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
@@ -288,4 +289,3 @@ function ErrorFallback({error}: {error: Error}) {
     </div>
   );
 }
-
