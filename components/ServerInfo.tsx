@@ -10,9 +10,10 @@ interface ServerInfoProps {
   serverData: ServerData;
   setActiveTab: (tab: string) => void;
   setInitialDiscordId: (id: string) => void;
+  setInitialSteamHex: (hex: string) => void;
 }
 
-export function ServerInfo({ serverData, setActiveTab, setInitialDiscordId }: ServerInfoProps) {
+export function ServerInfo({ serverData, setActiveTab, setInitialDiscordId, setInitialSteamHex }: ServerInfoProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchField, setSearchField] = useState<'name' | 'id'>('name');
   const [isLoading, setIsLoading] = useState(true);
@@ -77,6 +78,7 @@ export function ServerInfo({ serverData, setActiveTab, setInitialDiscordId }: Se
               player={player}
               setActiveTab={setActiveTab}
               setInitialDiscordId={setInitialDiscordId}
+              setInitialSteamHex={setInitialSteamHex}
             />
           ))
         )}

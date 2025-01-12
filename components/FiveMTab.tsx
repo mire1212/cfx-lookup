@@ -20,29 +20,35 @@ import { Label } from "@/components/ui/label"
 interface FiveMTabProps {
   setActiveTab: (tab: string) => void;
   setInitialDiscordId: (id: string) => void;
+  setInitialSteamHex: (hex: string) => void;
   serverData: ServerData | null;
   setServerData: React.Dispatch<React.SetStateAction<ServerData | null>>;
   serverIp: string;
   setServerIp: React.Dispatch<React.SetStateAction<string>>;
+  isDisabled: boolean;
 }
 
 interface BookmarkData {
   name: string;
   ip: string;
+  displayName: string;
 }
 
 export function FiveMTab({
   setActiveTab,
   setInitialDiscordId,
+  setInitialSteamHex,
   serverData,
   setServerData,
   serverIp,
-  setServerIp
+  setServerIp,
+  isDisabled
 }: FiveMTabProps) {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [bookmarks, setBookmarks] = useState<BookmarkData[]>([]);
   const [newBookmarkIp, setNewBookmarkIp] = useState('');
+  const [newBookmarkDisplayName, setNewBookmarkDisplayName] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
@@ -84,7 +90,7 @@ export function FiveMTab({
   };
 
   const handleAddBookmark = async () => {
-    if (newBookmarkIp) {
+    if (newBookmarkIp && newBookmarkDisplayName) {
       setIsLoading(true);
       try {
         const response = await fetch(`https://servers-frontend.fivem.net/api/servers/single/${newBookmarkIp}`);
@@ -95,10 +101,12 @@ export function FiveMTab({
         const newBookmark: BookmarkData = {
           name: data.Data.hostname.replace(/\^[0-9]/g, ''),
           ip: newBookmarkIp,
+          displayName: newBookmarkDisplayName
         };
         const updatedBookmarks = [...bookmarks, newBookmark];
         saveBookmarks(updatedBookmarks);
         setNewBookmarkIp('');
+        setNewBookmarkDisplayName('');
         setIsDialogOpen(false);
       } catch (error) {
         setError('Failed to add bookmark. Please check the IP and try again.');
@@ -127,10 +135,11 @@ export function FiveMTab({
           onChange={(e) => setServerIp(e.target.value)}
           placeholder="Enter server IP"
           className="flex-grow bg-muted text-foreground border-primary h-12"
+          disabled={isDisabled}
         />
         <Button 
           onClick={handleSearch} 
-          disabled={isLoading} 
+          disabled={isLoading || isDisabled} 
           className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full sm:w-auto"
         >
           {isLoading ? 'Searching...' : 'Search'}
@@ -141,7 +150,7 @@ export function FiveMTab({
         {bookmarks.map((bookmark, index) => (
           <Bookmark
             key={index}
-            name={bookmark.name}
+            name={bookmark.displayName}
             ip={bookmark.ip}
             onSelect={(ip) => {
               setServerIp(ip);
@@ -158,7 +167,7 @@ export function FiveMTab({
             <DialogHeader>
               <DialogTitle>Add New Bookmark</DialogTitle>
               <DialogDescription>
-                Enter a server IP to create a new bookmark.
+                Enter a server IP and display name to create a new bookmark.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
@@ -172,6 +181,18 @@ export function FiveMTab({
                   onChange={(e) => setNewBookmarkIp(e.target.value)}
                   className="col-span-3"
                   placeholder="Enter server IP"
+                />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="displayName" className="text-right">
+                  Display Name
+                </Label>
+                <Input
+                  id="displayName"
+                  value={newBookmarkDisplayName}
+                  onChange={(e) => setNewBookmarkDisplayName(e.target.value)}
+                  className="col-span-3"
+                  placeholder="Enter display name"
                 />
               </div>
             </div>
@@ -201,6 +222,7 @@ export function FiveMTab({
           serverData={serverData}
           setActiveTab={setActiveTab}
           setInitialDiscordId={setInitialDiscordId}
+          setInitialSteamHex={setInitialSteamHex}
         />
       )}
     </motion.div>

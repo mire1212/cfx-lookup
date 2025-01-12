@@ -1,0 +1,4 @@
+{
+  "/page": "app/page.js",
+  "/api/steam-profile/route": "app/api/steam-profile/route.js"
+}

@@ -7,17 +7,25 @@ interface PlayerCardProps {
   player: Player;
   setActiveTab: (tab: string) => void;
   setInitialDiscordId: (id: string) => void;
+  setInitialSteamHex: (hex: string) => void;
 }
 
-export function PlayerCard({ player, setActiveTab, setInitialDiscordId }: PlayerCardProps) {
+export function PlayerCard({ player, setActiveTab, setInitialDiscordId, setInitialSteamHex }: PlayerCardProps) {
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text.split(':')[1]);
   };
 
-  const handleDiscordClick = (identifier: string) => {
-    const discordId = identifier.split(':')[1];
-    setInitialDiscordId(discordId);
-    setActiveTab('discord');
+  const handleIdentifierClick = (identifier: string) => {
+    if (identifier.startsWith('discord:')) {
+      const discordId = identifier.split(':')[1];
+      setInitialDiscordId(discordId);
+      setActiveTab('discord');
+    } else if (identifier.startsWith('steam:')) {
+      setInitialSteamHex(identifier);
+      setActiveTab('steam');
+    } else {
+      copyToClipboard(identifier);
+    }
   };
 
   return (
@@ -37,11 +45,7 @@ export function PlayerCard({ player, setActiveTab, setInitialDiscordId }: Player
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() =>
-                  identifier.startsWith('discord:')
-                    ? handleDiscordClick(identifier)
-                    : copyToClipboard(identifier)
-                }
+                onClick={() => handleIdentifierClick(identifier)}
                 className="hover:bg-primary hover:text-primary-foreground h-8 w-8 min-w-[32px]"
               >
                 <Copy className="h-4 w-4" />

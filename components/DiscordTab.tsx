@@ -11,9 +11,10 @@ import { DiscordUser } from '../types';
 interface DiscordTabProps {
   initialDiscordId: string | null;
   activeTab: string;
+  isDisabled: boolean;
 }
 
-export function DiscordTab({ initialDiscordId, activeTab }: DiscordTabProps) {
+export function DiscordTab({ initialDiscordId, activeTab, isDisabled }: DiscordTabProps) {
   const [discordId, setDiscordId] = useState(initialDiscordId || '');
   const [userData, setUserData] = useState<DiscordUser | null>(null);
   const [error, setError] = useState('');
@@ -61,10 +62,11 @@ export function DiscordTab({ initialDiscordId, activeTab }: DiscordTabProps) {
           onChange={(e) => setDiscordId(e.target.value)}
           placeholder="Enter Discord ID"
           className="flex-grow bg-muted text-foreground border-primary h-12"
+          disabled={isDisabled}
         />
         <Button 
           onClick={fetchDiscordUserInfo} 
-          disabled={isLoading}
+          disabled={isLoading || isDisabled}
           className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full sm:w-auto"
         >
           {isLoading ? 'Searching...' : 'Search'}
