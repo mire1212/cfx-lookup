@@ -1,4 +1,4 @@
 {
-  "/page": "app/page.js",
-  "/api/steam-profile/route": "app/api/steam-profile/route.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js"
 }
