@@ -11,7 +11,7 @@ import { KeyAuth } from '../components/KeyAuth';
 import { UserInfo } from '../components/UserInfo';
 import { ErrorOverlay } from '../components/ErrorOverlay';
 import { ServerData } from '../types';
-import 'App.css';
+import './App.css';
 import { ErrorBoundary } from 'react-error-boundary';
 
 const MemoizedFiveMTab = React.memo(FiveMTab);
