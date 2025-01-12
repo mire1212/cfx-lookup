@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Access Denied',
-  description: 'The requested resource could not be found.',
+  description: 'You dont have permission to access this page.',
 }
 
 export default function RootLayout({
