@@ -210,7 +210,7 @@ export function App() {
                       disabled={isDevToolsOpen}
                     >
                       <Server className="w-4 h-4" />
-                      <span>FiveM Server</span>
+                      <span>Server</span>
                     </button>
                     <button
                       onClick={() => !isDevToolsOpen && setActiveTab('discord')}
@@ -220,7 +220,7 @@ export function App() {
                       disabled={isDevToolsOpen}
                     >
                       <User className="w-4 h-4" />
-                      <span>Discord ID</span>
+                      <span>Discord</span>
                     </button>
                     <button
                       onClick={() => !isDevToolsOpen && setActiveTab('steam')}
@@ -230,7 +230,7 @@ export function App() {
                       disabled={isDevToolsOpen}
                     >
                       <Steam className="w-4 h-4" />
-                      <span>Steam ID</span>
+                      <span>Steam</span>
                     </button>
                   </nav>
                 </div>
