@@ -1694,6 +1694,9 @@ video {
 .text-sidebar-foreground\/70 {
   color: hsl(var(--sidebar-foreground) / 0.7);
 }
+.text-transparent {
+  color: transparent;
+}
 .underline-offset-4 {
   text-underline-offset: 4px;
 }
@@ -1892,6 +1895,24 @@ video {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.selection\:text-white *::selection {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.selection\:text-muted-foreground *::selection {
+  color: hsl(var(--muted-foreground));
+}
+
+.selection\:text-white::selection {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.selection\:text-muted-foreground::selection {
+  color: hsl(var(--muted-foreground));
 }
 
 .file\:border-0::file-selector-button {
@@ -4970,6 +4991,9 @@ video {
 .text-sidebar-foreground\/70 {
   color: hsl(var(--sidebar-foreground) / 0.7);
 }
+.text-transparent {
+  color: transparent;
+}
 .underline-offset-4 {
   text-underline-offset: 4px;
 }
@@ -5168,6 +5192,24 @@ video {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.selection\:text-white *::selection {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.selection\:text-muted-foreground *::selection {
+  color: hsl(var(--muted-foreground));
+}
+
+.selection\:text-white::selection {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.selection\:text-muted-foreground::selection {
+  color: hsl(var(--muted-foreground));
 }
 
 .file\:border-0::file-selector-button {

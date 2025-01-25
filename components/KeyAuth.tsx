@@ -85,12 +85,20 @@ export function KeyAuth({ onAuthenticate }: KeyAuthProps) {
         Access Denied: You don't have permission to use this site.
       </motion.p>
       <motion.div
-        className="text-sm text-muted-foreground err-code cursor-pointer"
+        className="text-sm text-muted-foreground err-code"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
       >
         [ERR_CODE: 0x8007045D]
+      </motion.div>
+      <motion.div
+        className="text-sm text-muted-foreground err-code  text-transparent selection:text-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+      >
+        [PRESS G TWICE TO CONTINUE]
       </motion.div>
     </motion.div>
   );
