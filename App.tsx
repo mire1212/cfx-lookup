@@ -14,6 +14,8 @@ import { ServerData } from './types';
 import './App.css';
 import { ErrorBoundary } from 'react-error-boundary';
 
+
+
 const MemoizedFiveMTab = React.memo(FiveMTab);
 const MemoizedDiscordTab = React.memo(DiscordTab);
 const MemoizedSteamTab = React.memo(SteamTab);

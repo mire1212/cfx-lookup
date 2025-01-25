@@ -1894,6 +1894,7 @@ nav button.active{
   transition: all 0.3s ease-in-out;
 }
 
+
 .slide-in {
   transform: translateX(0);
   opacity: 1;
