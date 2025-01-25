@@ -13,6 +13,7 @@ import { ErrorOverlay } from './components/ErrorOverlay';
 import { ServerData } from './types';
 import './App.css';
 import { ErrorBoundary } from 'react-error-boundary';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 
