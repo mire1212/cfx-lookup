@@ -27,12 +27,22 @@ export function ServerInfo({ serverData, setActiveTab, setInitialDiscordId, setI
     return text.replace(/\^[0-9]/g, '');
   };
 
-  const filteredPlayers = serverData.Data.players.filter((player) => {
-    if (searchField === 'id') {
-      return player.id.toString().includes(searchTerm.toLowerCase());
-    }
-    return player.name.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  const filteredPlayers = serverData.Data.players
+    .filter((player) => {
+      if (searchField === 'id') {
+        return player.id.toString().includes(searchTerm.toLowerCase());
+      }
+      return player.name.toLowerCase().includes(searchTerm.toLowerCase());
+    })
+    .sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+
+      // Sort numbers and special characters first
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
 
   return (
     <motion.div
@@ -61,8 +71,8 @@ export function ServerInfo({ serverData, setActiveTab, setInitialDiscordId, setI
             <SelectValue placeholder="Search by" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="name">Search by Name</SelectItem>
             <SelectItem value="id">Search by ID</SelectItem>
+            <SelectItem value="name">Search by Name</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -86,4 +96,3 @@ export function ServerInfo({ serverData, setActiveTab, setInitialDiscordId, setI
     </motion.div>
   );
 }
-
