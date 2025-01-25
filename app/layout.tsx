@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { JetBrains_Mono } from "next/font/google"
 import '../styles/globals.css';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -19,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={jetbrainsMono.className}>{children}</body>
+      <body className={jetbrainsMono.className}>{children}
+      <SpeedInsights />
+      </body>
     </html>
   )
 }
