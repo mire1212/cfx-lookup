@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { ServerInfo } from './ServerInfo';
 import { Bookmark } from './Bookmark';
 import { ServerData } from '../types';
@@ -16,6 +16,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
+
 
 interface FiveMTabProps {
   setActiveTab: (tab: string) => void;
@@ -50,6 +51,7 @@ export function FiveMTab({
   const [newBookmarkIp, setNewBookmarkIp] = useState('');
   const [newBookmarkDisplayName, setNewBookmarkDisplayName] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [showDiscordAlert, setShowDiscordAlert] = useState(true);
 
   useEffect(() => {
     const storedBookmarks = localStorage.getItem('serverBookmarks');
@@ -128,6 +130,20 @@ export function FiveMTab({
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      {showDiscordAlert && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Alert variant="destructive">
+            <AlertTitle>Discord Search Issue</AlertTitle>
+            <AlertDescription>
+              If you run into issues just refresh the site after searching for a user should fix it G.
+            </AlertDescription>
+          </Alert>
+        </motion.div>
+      )}
       <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
         <Input
           type="text"

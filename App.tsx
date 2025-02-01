@@ -52,6 +52,8 @@ export function App() {
     setAnimatedText(text);
   }, []);
 
+
+
   useEffect(() => {
     console.log('Authentication effect running');
     const storedAuth = localStorage.getItem('isAuthenticated');
@@ -281,12 +283,14 @@ export function App() {
   );
 }
 
-function ErrorFallback({error}: {error: Error}) {
+function ErrorFallback({ error }: { error?: Error }) {  // Make error optional
   return (
     <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
       <div className="text-center">
         <h1 className="text-2xl font-bold mb-4">Something went wrong:</h1>
-        <pre className="text-red-500">{error.message}</pre>
+        <pre className="text-red-500">
+          {error?.message || 'An unexpected error occurred'}  {/* Add fallback message */}
+        </pre>
       </div>
     </div>
   );
