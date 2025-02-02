@@ -105,7 +105,7 @@ export function DiscordTab({ initialDiscordId, activeTab, isDisabled }: {
             </Avatar>
             <div>
               <h2 className="text-2xl font-bold terminal-text">{userData.username}</h2>
-              <p className="text-sm text-muted-foreground">ID: {userData.global_name}</p>
+              <p className="text-sm text-muted-foreground">{userData.global_name}</p>
             </div>
           </div>
 
