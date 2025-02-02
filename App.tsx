@@ -13,6 +13,7 @@ import { ErrorOverlay } from './components/ErrorOverlay';
 import { ServerData } from './types';
 import './App.css';
 import { ErrorBoundary } from 'react-error-boundary';
+import type { AppProps } from 'next/app';
 
 
 
@@ -22,9 +23,9 @@ const MemoizedSteamTab = React.memo(SteamTab);
 const MemoizedKeyAuth = React.memo(KeyAuth);
 const MemoizedUserInfo = React.memo(UserInfo);
 
-export function App() {
+export function App({ Component, pageProps }: AppProps) {
   const [activeTab, setActiveTab] = useState<'fivem' | 'discord' | 'steam'>('fivem');
-  const [animatedText, setAnimatedText] = useState('CFX LOOKUP');  // Initialize with full text
+  const [animatedText, setAnimatedText] = useState('CFX LOOKUP');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [user, setUser] = useState(null);
@@ -80,7 +81,16 @@ export function App() {
 
 
   return (
-    <ErrorBoundary fallback={<ErrorFallback />}>
+    <ErrorBoundary 
+    fallback={
+      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+        <div className="text-center p-6">
+          <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
+          <p className="text-red-500">Please try refreshing the page</p>
+        </div>
+      </div>
+    }
+  >
       <Head>
         <title>Error 404: Access Denied | Secure Server</title>
         <meta name="description" content="Error 404: The requested resource could not be found. Access to this page is restricted." />
@@ -204,6 +214,7 @@ export function App() {
           )}
         </AnimatePresence>
         <Analytics />
+        
       </div>
     </ErrorBoundary>
   );

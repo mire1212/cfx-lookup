@@ -17,16 +17,7 @@ const nextConfig = {
     unoptimized: true,
     domains: ['cdn.discordapp.com', 'steamcdn-a.akamaihd.net'],
   },
-  experimental: {
-    webpackBuildWorker: false,
-    parallelServerBuildTraces: false,
-    parallelServerCompiles: false,
-  },
   output: 'standalone',
-  webpack: (config) => {
-    config.optimization.minimize = true;
-    return config;
-  },
 }
 
 mergeConfig(nextConfig, userConfig)
