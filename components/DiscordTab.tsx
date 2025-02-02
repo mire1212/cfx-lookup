@@ -105,11 +105,12 @@ export function DiscordTab({ initialDiscordId, activeTab, isDisabled }: {
             </Avatar>
             <div>
               <h2 className="text-2xl font-bold terminal-text">{userData.username}</h2>
-              <p className="text-sm text-muted-foreground">ID: {userData.id}</p>
+              <p className="text-sm text-muted-foreground">ID: {userData.global_name}</p>
             </div>
           </div>
 
           <div className="space-y-2">
+            <p className="text-sm text-muted-foreground">ID: {userData.id}</p>
             <p><strong>Created At:</strong> {new Date(userData.created_at).toLocaleString()}</p>
             
             {userData.badges?.length > 0 && (
