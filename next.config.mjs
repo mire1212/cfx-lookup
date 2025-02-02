@@ -15,11 +15,17 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: ['cdn.discordapp.com', 'steamcdn-a.akamaihd.net'],
   },
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
+  },
+  output: 'standalone',
+  webpack: (config) => {
+    config.optimization.minimize = true;
+    return config;
   },
 }
 

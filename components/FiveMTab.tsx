@@ -19,7 +19,7 @@ import { Label } from "@/components/ui/label"
 
 
 interface FiveMTabProps {
-  setActiveTab: (tab: string) => void;
+  setActiveTab: (tab: 'fivem' | 'discord' | 'steam') => void;
   setInitialDiscordId: (id: string) => void;
   setInitialSteamHex: (hex: string) => void;
   serverData: ServerData | null;

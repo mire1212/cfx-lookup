@@ -8,7 +8,7 @@ import { PlayerCard } from './PlayerCard';
 
 interface ServerInfoProps {
   serverData: ServerData;
-  setActiveTab: (tab: string) => void;
+  setActiveTab: (tab: 'fivem' | 'discord' | 'steam') => void;
   setInitialDiscordId: (id: string) => void;
   setInitialSteamHex: (hex: string) => void;
 }

@@ -5,7 +5,7 @@ import { Player } from '../types';
 
 interface PlayerCardProps {
   player: Player;
-  setActiveTab: (tab: string) => void;
+  setActiveTab: (tab: 'fivem' | 'discord' | 'steam') => void;
   setInitialDiscordId: (id: string) => void;
   setInitialSteamHex: (hex: string) => void;
 }

@@ -24,7 +24,7 @@ const MemoizedUserInfo = React.memo(UserInfo);
 
 export function App() {
   const [activeTab, setActiveTab] = useState<'fivem' | 'discord' | 'steam'>('fivem');
-  const [animatedText, setAnimatedText] = useState('');
+  const [animatedText, setAnimatedText] = useState('CFX LOOKUP');  // Initialize with full text
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [user, setUser] = useState(null);
@@ -34,10 +34,21 @@ export function App() {
   const [serverIp, setServerIp] = useState('');
   const [isDevToolsOpen, setIsDevToolsOpen] = useState(false);
 
+  // Simplified animation effect
   useEffect(() => {
-    console.log('App component rendering');
-  }, []);
+    if (!isAuthenticated) return;
 
+    const text = 'CFX LOOKUP';
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      setAnimatedText(text.slice(0, currentIndex + 1));
+      currentIndex = (currentIndex + 1) % (text.length + 1);
+    }, 200);
+
+    return () => clearInterval(interval);
+  }, [isAuthenticated]);
+
+  // Memoized handlers
   const handleSetInitialDiscordId = useCallback((id: string) => {
     setInitialDiscordId(id);
     setActiveTab('discord');
@@ -48,94 +59,11 @@ export function App() {
     setActiveTab('steam');
   }, []);
 
-  const setAnimatedTextMemoized = useCallback((text: string) => {
-    setAnimatedText(text);
-  }, []);
-
-
-
-  useEffect(() => {
-    console.log('Authentication effect running');
-    const storedAuth = localStorage.getItem('isAuthenticated');
-    if (storedAuth === 'true') {
-      setIsAuthenticated(true);
-    }
-
-    const text = 'CFX LOOKUP';
-    let direction = 'forward';
-    let currentIndex = 0;
-    let timer: NodeJS.Timeout;
-
-    const animate = () => {
-      if (direction === 'forward') {
-        if (currentIndex <= text.length) {
-          setAnimatedTextMemoized(text.slice(0, currentIndex));
-          currentIndex++;
-        } else {
-          direction = 'backward';
-        }
-      } else {
-        if (currentIndex >= 0) {
-          setAnimatedTextMemoized(text.slice(0, currentIndex));
-          currentIndex--;
-        } else {
-          direction = 'forward';
-        }
-      }
-
-      timer = setTimeout(animate, direction === 'forward' ? 150 : 75);
-    };
-
-    animate();
-
-    return () => clearTimeout(timer);
-  }, [setAnimatedTextMemoized]);
-
-  // DevTools detection
-  useEffect(() => {
-    const detectDevTools = () => {
-      if (window.innerWidth > 800) { // Check for desktop devices only
-        if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
-          setIsDevToolsOpen(true);
-        } else {
-          setIsDevToolsOpen(false);
-        }
-      }
-    };
-
-    window.addEventListener('resize', detectDevTools);
-    const intervalId = setInterval(detectDevTools, 1000);
-
-    return () => {
-      window.removeEventListener('resize', detectDevTools);
-      clearInterval(intervalId);
-    };
-  }, []);
-
-  useEffect(() => {
-    const disableInspect = (e: KeyboardEvent) => {
-      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
-        e.preventDefault();
-      }
-    };
-
-    const disableContextMenu = (e: MouseEvent) => {
-      e.preventDefault();
-    };
-
-    document.addEventListener('keydown', disableInspect);
-    document.addEventListener('contextmenu', disableContextMenu);
-
-    return () => {
-      document.removeEventListener('keydown', disableInspect);
-      document.removeEventListener('contextmenu', disableContextMenu);
-    };
-  }, []);
-
   const handleAuthenticate = useCallback(() => {
     setIsTransitioning(true);
     setTimeout(() => {
       setIsAuthenticated(true);
+      localStorage.setItem('isAuthenticated', 'true');
       setIsTransitioning(false);
     }, 1000);
   }, []);
@@ -149,6 +77,7 @@ export function App() {
       setIsTransitioning(false);
     }, 1000);
   }, []);
+
 
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
@@ -193,7 +122,7 @@ export function App() {
             >
               <div className="container mx-auto p-4 max-w-4xl">
                 <div className="flex justify-between items-center mb-8">
-                  <motion.h1 
+                  <motion.h1
                     className="text-2xl md:text-4xl font-bold text-center terminal-text glow"
                     initial={{ opacity: 0, y: -50 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -208,9 +137,8 @@ export function App() {
                   <nav className="flex border-b border-primary">
                     <button
                       onClick={() => !isDevToolsOpen && setActiveTab('fivem')}
-                      className={`flex items-center justify-center gap-2 px-4 py-2 focus:outline-none ${
-                        activeTab === 'fivem' ? 'border-b-2 border-primary' : ''
-                      } ${isDevToolsOpen ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      className={`flex items-center justify-center gap-2 px-4 py-2 focus:outline-none ${activeTab === 'fivem' ? 'border-b-2 border-primary' : ''
+                        } ${isDevToolsOpen ? 'opacity-50 cursor-not-allowed' : ''}`}
                       disabled={isDevToolsOpen}
                     >
                       <Server className="w-4 h-4" />
@@ -218,9 +146,8 @@ export function App() {
                     </button>
                     <button
                       onClick={() => !isDevToolsOpen && setActiveTab('discord')}
-                      className={`flex items-center justify-center gap-2 px-4 py-2 focus:outline-none ${
-                        activeTab === 'discord' ? 'border-b-2 border-primary' : ''
-                      } ${isDevToolsOpen ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      className={`flex items-center justify-center gap-2 px-4 py-2 focus:outline-none ${activeTab === 'discord' ? 'border-b-2 border-primary' : ''
+                        } ${isDevToolsOpen ? 'opacity-50 cursor-not-allowed' : ''}`}
                       disabled={isDevToolsOpen}
                     >
                       <User className="w-4 h-4" />
@@ -228,9 +155,8 @@ export function App() {
                     </button>
                     <button
                       onClick={() => !isDevToolsOpen && setActiveTab('steam')}
-                      className={`flex items-center justify-center gap-2 px-4 py-2 focus:outline-none ${
-                        activeTab === 'steam' ? 'border-b-2 border-primary' : ''
-                      } ${isDevToolsOpen ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      className={`flex items-center justify-center gap-2 px-4 py-2 focus:outline-none ${activeTab === 'steam' ? 'border-b-2 border-primary' : ''
+                        } ${isDevToolsOpen ? 'opacity-50 cursor-not-allowed' : ''}`}
                       disabled={isDevToolsOpen}
                     >
                       <Steam className="w-4 h-4" />
