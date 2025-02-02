@@ -18,9 +18,9 @@ const nextConfig = {
     domains: ['cdn.discordapp.com', 'steamcdn-a.akamaihd.net'],
   },
   experimental: {
-    webpackBuildWorker: true,
-    parallelServerBuildTraces: true,
-    parallelServerCompiles: true,
+    webpackBuildWorker: false,
+    parallelServerBuildTraces: false,
+    parallelServerCompiles: false,
   },
   output: 'standalone',
   webpack: (config) => {
