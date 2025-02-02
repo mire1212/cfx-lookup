@@ -18,6 +18,9 @@ export function PlayerCard({ player, setActiveTab, setInitialDiscordId, setIniti
   const handleIdentifierClick = (identifier: string) => {
     if (identifier.startsWith('discord:')) {
       const discordId = identifier.split(':')[1];
+      // Clear previous search data
+      localStorage.removeItem('lastDiscordSearch');
+      localStorage.removeItem('lastDiscordUser');
       setInitialDiscordId(discordId);
       setActiveTab('discord');
     } else if (identifier.startsWith('steam:')) {
