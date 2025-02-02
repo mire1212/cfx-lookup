@@ -1,5 +1,0 @@
-{
-  "/api/discord-profile/route": "app/api/discord-profile/route.js",
-  "/api/steam-profile/route": "app/api/steam-profile/route.js",
-  "/page": "app/page.js"
-}
