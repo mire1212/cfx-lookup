@@ -60,6 +60,8 @@ export function KeyAuth({ onAuthenticate }: KeyAuthProps) {
     };
   }, [onAuthenticate]);
 
+ 
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

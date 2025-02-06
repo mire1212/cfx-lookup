@@ -130,20 +130,6 @@ export function FiveMTab({
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {showDiscordAlert && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Alert variant="destructive">
-            <AlertTitle>Discord Search Issue</AlertTitle>
-            <AlertDescription>
-              If you run into issues just refresh the site after searching for a user should fix it G.
-            </AlertDescription>
-          </Alert>
-        </motion.div>
-      )}
       <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
         <Input
           type="text"

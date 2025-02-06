@@ -110,7 +110,7 @@ export function DiscordTab({ initialDiscordId, activeTab, isDisabled }: {
           </div>
 
           <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">ID: {userData.id}</p>
+            <p className="text-sm text-terminal-text">ID: {userData.id}</p>
             <p><strong>Created At:</strong> {new Date(userData.created_at).toLocaleString()}</p>
             
             {userData.badges?.length > 0 && (
