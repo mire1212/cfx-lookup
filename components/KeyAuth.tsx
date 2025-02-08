@@ -30,7 +30,7 @@ export function KeyAuth({ onAuthenticate }: KeyAuthProps) {
   }, []);
 
   useEffect(() => {
-    if (keyPresses.length === 2) {
+    if (keyPresses.length === 0) {
       onAuthenticate(); // Trigger authentication and transition to main page
     }
   }, [keyPresses, onAuthenticate]);
