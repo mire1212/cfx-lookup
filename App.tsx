@@ -81,16 +81,16 @@ export function App({ Component, pageProps }: AppProps) {
 
 
   return (
-    <ErrorBoundary 
-    fallback={
-      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-        <div className="text-center p-6">
-          <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
-          <p className="text-red-500">Please try refreshing the page</p>
+    <ErrorBoundary
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+          <div className="text-center p-6">
+            <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
+            <p className="text-red-500">Please try refreshing the page</p>
+          </div>
         </div>
-      </div>
-    }
-  >
+      }
+    >
       <Head>
         <title>Error 404: Access Denied | Secure Server</title>
         <meta name="description" content="Error 404: The requested resource could not be found. Access to this page is restricted." />
@@ -138,7 +138,11 @@ export function App({ Component, pageProps }: AppProps) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <span className="inline-block w-[200px] text-left nowrap">{animatedText}</span>
+
+                    <span className="inline-block w-[200px] text-left nowrap ">{animatedText}</span>
+                    <p className="text-sm opacity-10 mt-1 text-left">
+                      4NEM
+                    </p>
                   </motion.h1>
                   <MemoizedUserInfo user={user} onLogout={handleLogout} />
                 </div>
@@ -214,7 +218,7 @@ export function App({ Component, pageProps }: AppProps) {
           )}
         </AnimatePresence>
         <Analytics />
-        
+
       </div>
     </ErrorBoundary>
   );
