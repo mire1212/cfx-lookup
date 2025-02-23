@@ -135,7 +135,7 @@ export function FiveMTab({
           type="text"
           value={serverIp}
           onChange={(e) => setServerIp(e.target.value)}
-          placeholder="Enter server IP"
+          placeholder="cfx.re/join/..."
           className="flex-grow bg-muted text-foreground border-primary h-12"
           disabled={isDisabled}
         />
