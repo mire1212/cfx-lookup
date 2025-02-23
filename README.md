@@ -1,2 +1,4 @@
-https://cfx-lookup-newnew.vercel.app/
-MADE WITH https://v0.dev/ + ChatGPT
+
+SITE MADE WITH V0.dev + ChatGPT
+[ChatGPT](https://chatgpt.com/)
+[V0.dev](https://v0.dev/)
