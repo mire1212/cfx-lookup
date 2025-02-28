@@ -92,8 +92,8 @@ export function App({ Component, pageProps }: AppProps) {
       }
     >
       <Head>
-        <title>Error 404: Access Denied | Secure Server</title>
-        <meta name="description" content="Error 404: The requested resource could not be found. Access to this page is restricted." />
+        <title>CFX LOOKUP</title>
+        <meta name="description" content="TOOL" />
       </Head>
       <div className="min-h-screen bg-background text-foreground matrix-bg">
         <ErrorOverlay isVisible={isDevToolsOpen} />
@@ -139,8 +139,8 @@ export function App({ Component, pageProps }: AppProps) {
                     transition={{ duration: 0.5 }}
                   >
 
-                    <span className="inline-block w-[200px] text-left nowrap ">{animatedText}</span>
-                    <p className="text-sm opacity-10 mt-1 text-left">
+                    <span className="inline-block w-[200px] text-left nowrap">{animatedText}</span>
+                    <p className="text-sm opacity-10 mt-1 text-left ">
                       4NEM
                     </p>
                   </motion.h1>

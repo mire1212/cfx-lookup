@@ -131,10 +131,7 @@ nav button.active {
   @apply text-primary;
 }
 
-/* Smooth animations */
-* {
-  transition: all 0.3s ease-in-out;
-}
+
 
 
 .slide-in {
