@@ -16,6 +16,8 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
+import { AlertCircle, Terminal } from "lucide-react"
+
 
 
 interface FiveMTabProps {
@@ -147,6 +149,13 @@ export function FiveMTab({
           {isLoading ? 'Searching...' : 'Search'}
         </Button>
       </div>
+      <Alert>
+      <Terminal className="h-4 w-4" />
+      <AlertTitle>STEAM Search</AlertTitle>
+      <AlertDescription>
+        Got issues with the api will be fixed soon 🙏😁
+      </AlertDescription>
+    </Alert>
 
       <div className="flex flex-wrap gap-2">
         {bookmarks.map((bookmark, index) => (

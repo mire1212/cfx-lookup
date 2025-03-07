@@ -24,9 +24,6 @@ export function PlayerCard({ player, setActiveTab, setInitialDiscordId, setIniti
       setInitialDiscordId(discordId);
       setActiveTab('discord');
     } else if (identifier.startsWith('steam:')) {
-      setInitialSteamHex(identifier);
-      setActiveTab('steam');
-    } else {
       copyToClipboard(identifier);
     }
   };
