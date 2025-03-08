@@ -149,13 +149,7 @@ export function FiveMTab({
           {isLoading ? 'Searching...' : 'Search'}
         </Button>
       </div>
-      <Alert>
-      <Terminal className="h-4 w-4" />
-      <AlertTitle>STEAM Search</AlertTitle>
-      <AlertDescription>
-        Got issues with the api will be fixed soon 🙏😁
-      </AlertDescription>
-    </Alert>
+
 
       <div className="flex flex-wrap gap-2">
         {bookmarks.map((bookmark, index) => (

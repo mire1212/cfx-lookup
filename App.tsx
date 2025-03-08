@@ -168,8 +168,10 @@ export function App({ Component, pageProps }: AppProps) {
                       <span>Discord</span>
                     </button>
                     <button
-                      className="flex items-center justify-center gap-2 px-4 py-2  text-white opacity-50"
-                      disabled={true}
+                      onClick={() => !isDevToolsOpen && setActiveTab('steam')}
+                      className={`flex items-center justify-center gap-2 px-4 py-2 focus:outline-none ${activeTab === 'steam' ? 'border-b-2 border-primary' : ''
+                        } ${isDevToolsOpen ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      disabled={isDevToolsOpen}
                     >
                       <Steam className="w-4 h-4" />
                       <span>Steam</span>
