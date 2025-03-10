@@ -94,6 +94,7 @@ export function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>CFX LOOKUP</title>
         <meta name="description" content="TOOL" />
+        <link rel="icon" href="/public/favicon.ico"></link>
       </Head>
       <div className="min-h-screen bg-background text-foreground matrix-bg">
         <ErrorOverlay isVisible={isDevToolsOpen} />
