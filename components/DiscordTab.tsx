@@ -100,7 +100,6 @@ export function DiscordTab({ initialDiscordId, activeTab, isDisabled }: {
         >
           <div className="flex items-center space-x-4">
             <Avatar className="h-20 w-20">
-              {/* <AvatarImage src={userData.avatar?.link || "https://cdn.discordapp.com/embed/avatars/0.png"} /> */}
               <AvatarImage
                 src={`/api/proxy-avatar?url=${encodeURIComponent(userData.avatar?.link || "https://cdn.discordapp.com/embed/avatars/0.png")}`}
               />
